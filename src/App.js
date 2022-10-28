@@ -4,7 +4,7 @@ import Products from "./pages/Products"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom"
-import Navbar from './Navbar/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import Singin from './pages/Auth/Singin';
 import Singup from './pages/Auth/Singup';
 
@@ -30,8 +30,7 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/products' element={<Products />} />
+          <Route path='/' element={<Products />} />
           <Route path='/singin' element={<Singin />} />
           <Route path='/singup' element={<Singup />} />
         </Routes>
