@@ -3,8 +3,8 @@ import Card from "../../components/Card";
 import { useQuery } from '@tanstack/react-query'
 
 export default function Products() {
-  const { isLoading, error, data } = useQuery(['repoData'], () =>
-    fetch('https://localhost/4000').then(res =>
+  const { isLoading, error, data } = useQuery(['products'], () =>
+    fetch('http://localhost:4000/product').then(res =>
       res.json()
     )
   )
@@ -18,15 +18,9 @@ export default function Products() {
   return (
     <div>
       <Grid templateColumns='repeat(3, 1fr)' gap={4}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {data.map((item, key) => (
+          <Card key={key} item={item} />
+        ))}
       </Grid>
     </div>
   );
