@@ -1,13 +1,10 @@
 import { Grid } from "@chakra-ui/react";
 import Card from "../../components/Card";
 import { useQuery } from '@tanstack/react-query'
+import {fetchProductList} from "../../api.js"
 
 export default function Products() {
-  const { isLoading, error, data } = useQuery(['products'], () =>
-    fetch('http://localhost:4000/product').then(res =>
-      res.json()
-    )
-  )
+  const { isLoading, error, data } = useQuery(['products'], fetchProductList )
 
   if (isLoading) return 'Loading...'
 
