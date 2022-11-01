@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Products from "./pages/Products"
+import ProductDetail from "./pages/ProductDetail"
 import Home from "./pages/Home"
 import About from "./pages/About"
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom"
@@ -31,6 +32,7 @@ function App() {
 
         <Routes>
           <Route path='/' element={<Products />} />
+          <Route path='/product/:product_id' element={<ProductDetail />} />
           <Route path='/singin' element={<Singin />} />
           <Route path='/singup' element={<Singup />} />
         </Routes>
