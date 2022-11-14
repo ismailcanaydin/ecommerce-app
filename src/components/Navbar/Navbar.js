@@ -1,9 +1,13 @@
 import styles from "./styles.module.css"
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+import { useAuth } from "../../contexts/AuthContext"
 
 function Navbar() {
+    const { loggedIn } = useAuth();
+
+    console.log(loggedIn);
     return (
         <div>
             <nav className={styles.nav}>
@@ -18,25 +22,29 @@ function Navbar() {
                     </ul>
                 </div>
                 <div className={styles.right}>
-                    <Link to="/singin">
-                        <Button colorScheme='purple'>Login</Button>
-                    </Link>
-                    <Link to="/singup">
-                        <Button colorScheme='purple'>Register</Button>
-                    </Link>
+                    {
+                        !loggedIn && (
+                            <>
+                                <Link to="/singin">
+                                    <Button colorScheme='purple'>Login</Button>
+                                </Link>
+                                <Link to="/singup">
+                                    <Button colorScheme='purple'>Register</Button>
+                                </Link>
+                            </>
+                        )
+                    }
+
+                    {
+                        loggedIn && (
+                            <>
+                                <Link to="/profile">
+                                    <Button>Profile</Button>
+                                </Link>
+                            </>
+                        )
+                    }
                 </div>
-                {/* <Link to="/">Site Name</Link>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/pricing">Pricing</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
-                </ul> */}
             </nav>
         </div>
     )
