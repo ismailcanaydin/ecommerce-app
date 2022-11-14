@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Image, Button, GridItem } from "@chakra-ui/react"
+import { Box, Image, Button } from "@chakra-ui/react"
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
