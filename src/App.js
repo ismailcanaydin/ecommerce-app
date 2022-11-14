@@ -1,33 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 import Products from "./pages/Products"
 import ProductDetail from "./pages/ProductDetail"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Navbar from './components/Navbar/Navbar';
 import Singin from './pages/Auth/Singin';
 import Singup from './pages/Auth/Singup';
+import Profile from './pages/Profile';
 
 function App() {
-  // let component;
-  // switch (window.location.pathname) {
-  //   case "/":
-  //     component = <Home />;
-  //     break;
-  //   case "/pricing":
-  //     component = <Pricing />;
-  //     break;
-  //   case "/about":
-  //     component = <About />;
-  //     break;
-  // }
-
   return (
     <BrowserRouter>
       <div className="">
-
-
         <Navbar />
 
         <Routes>
@@ -35,10 +18,9 @@ function App() {
           <Route path='/product/:product_id' element={<ProductDetail />} />
           <Route path='/singin' element={<Singin />} />
           <Route path='/singup' element={<Singup />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
 
-
-        {/* {component} */}
       </div>
     </BrowserRouter>
 
