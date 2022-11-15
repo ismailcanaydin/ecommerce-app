@@ -3,9 +3,10 @@ import Products from "./pages/Products"
 import ProductDetail from "./pages/ProductDetail"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Navbar from './components/Navbar/Navbar';
-import Singin from './pages/Auth/Singin';
-import Singup from './pages/Auth/Singup';
+import Signin from './pages/Auth/Signin';
+import Signup from './pages/Auth/Signup';
 import Profile from './pages/Profile';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 function App() {
   return (
@@ -16,9 +17,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Products />} />
           <Route path='/product/:product_id' element={<ProductDetail />} />
-          <Route path='/singin' element={<Singin />} />
-          <Route path='/singup' element={<Singup />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/signup' element={<Signup />} />
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
 
       </div>

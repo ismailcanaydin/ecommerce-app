@@ -4,9 +4,12 @@ import { useFormik } from "formik"
 import validationSchema from "./validations.js"
 import { fetchRegister } from "../../../api"
 import { useAuth } from '../../../contexts/AuthContext.js'
+import { useNavigate } from 'react-router-dom'
 
-function Singup() {
+function Signup() {
   const { login } = useAuth();
+
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -20,6 +23,9 @@ function Singup() {
         const registerResponse = await fetchRegister({ email: values.email, password: values.password })
 
         login(registerResponse);
+
+        navigate('/profile');
+
         console.log(registerResponse);
       } catch (e) {
         bag.setErrors({ general: e.response.data.message })
@@ -88,4 +94,4 @@ function Singup() {
   )
 }
 
-export default Singup
+export default Signup
