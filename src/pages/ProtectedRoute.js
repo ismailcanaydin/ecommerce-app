@@ -1,11 +1,10 @@
 import React from 'react'
-import {  Outlet, Navigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
+import {  Outlet, Navigate } from 'react-router-dom';
 
-function ProtectedRoute({ component: Component, ...rest }) {
-    const { loggedIn } = useAuth();
+function ProtectedRoute() {
+    let auth = {'token':true};
 
-    return loggedIn ? <Outlet /> : <Navigate to="/" />;
+    return auth.token ? <Outlet /> : <Navigate to="/" />;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
