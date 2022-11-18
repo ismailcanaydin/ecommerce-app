@@ -1,12 +1,49 @@
-import { Alert, AlertTitle, Box, Button, Image, Text } from '@chakra-ui/react';
-import React from 'react'
+import {
+    Alert,
+    Box,
+    Button,
+    Image,
+    Text,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    FormControl,
+    FormLabel,
+    Textarea,
+} from '@chakra-ui/react';
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { postOrder } from '../../api';
 import { useBasket } from '../../contexts/BasketContext'
 
 function Basket() {
-    const { items, removeFromBasket } = useBasket();
+    const [address, setAddress] = useState('');
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const initialRef = useRef(null);
+
+    const { items, removeFromBasket, emptyBasket } = useBasket();
 
     const total = items.reduce((acc, obj) => acc + obj.price, 0);
+
+    const handleSubmitForm = async () => {
+        const itemsIds = items.map((item) => item._id);
+
+        const input = {
+            address,
+            items: JSON.stringify(itemsIds),
+        };
+
+        await postOrder(input);
+
+        emptyBasket();
+        onClose();
+    }
     return (
         <Box p={4} ms={2} fontSize={18}>
             {items.length < 1 && <Alert status='warning'>You have not any items your basket.</Alert>}
@@ -43,10 +80,40 @@ function Basket() {
                             </Text>
                         </Box>
                     </ul>
+
+                    <Button mt={2} size='sm' colorScheme={'green'} onClick={onOpen}>Order</Button>
+
+                    <Modal
+                        initialFocusRef={initialRef}
+                        isOpen={isOpen}
+                        onClose={onClose}
+                    >
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader>Create your account</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody pb={6}>
+                                <FormControl>
+                                    <FormLabel>Address</FormLabel>
+                                    <Textarea
+                                        ref={initialRef}
+                                        placeholder='Address'
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
+                                    />
+                                </FormControl>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button colorScheme='blue' mr={3} onClick={handleSubmitForm}>
+                                    Save
+                                </Button>
+                                <Button onClick={onClose}>Cancel</Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
                 </>
             )}
-
-
         </Box>
     )
 }
