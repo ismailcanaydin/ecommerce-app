@@ -4,11 +4,11 @@ import { useAuth } from '../../contexts/AuthContext';
 
 function ProtectedRouteAdmin() {
     const { user } = useAuth();
-    
+
+    {user?.role !== "admin" && <Navigate to={"/"}  />}
+
     return (
         <>
-            {user?.role !== "admin" && <Navigate to={"/"} replace />}
-            
             <Outlet />
         </>
     )
