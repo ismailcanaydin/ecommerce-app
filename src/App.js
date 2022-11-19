@@ -35,7 +35,7 @@ function App() {
 
         <Route element={<ProtectedRouteAdmin />}>
           <Route path='/admin' element={<Admin />} >
-            <Route index path='home' element={<Home />} />
+            <Route path='home' element={<Home />} />
             <Route path='orders' element={<Orders />} />
             <Route path='products' element={<AdminProducts />} />
           </Route>

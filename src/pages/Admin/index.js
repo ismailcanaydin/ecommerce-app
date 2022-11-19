@@ -16,7 +16,7 @@ function Admin() {
                         <Link to={"/admin/home"}>Home</Link>
                     </li>
                     <li>
-                        <Link to="/admin/orders">Orders</Link>
+                        <Link to={"/admin/orders"}>Orders</Link>
                     </li>
                     <li>
                         <Link to={'/admin/products'}>Products</Link>
