@@ -17,41 +17,35 @@ import Orders from './pages/Admin/Orders'
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="">
-        <Navbar />
 
-        <Routes>
-          <Route path='/' element={<Products />} />
-          <Route path='/product/:product_id' element={<ProductDetail />} />
-          <Route path='/signin' element={<Signin />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/basket' element={<Basket />} />
-          <Route path='*' element={<Error404 />} />
+    <div className="">
+      <Navbar />
 
-          <Route element={<ProtectedRoute />}>
-            <Route path="/profile" element={<Profile />} />
+      <Routes>
+        <Route path='/' element={<Products />} />
+        <Route path='/product/:product_id' element={<ProductDetail />} />
+        <Route path='/signin' element={<Signin />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/basket' element={<Basket />} />
+        <Route path='*' element={<Error404 />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+
+        <Route element={<ProtectedRouteAdmin />}>
+          <Route path='/admin' element={<Admin />} >
+            <Route index path='home' element={<Home />} />
+            <Route path='orders' element={<Orders />} />
+            <Route path='products' element={<AdminProducts />} />
           </Route>
+        </Route>
 
-          <Route element={<ProtectedRouteAdmin />}>
-            <Route index path='/admin' element={<Admin />} />
+      </Routes>
+    </div>
 
-            <Route path='/admin/home' element={<Home />} />
-            <Route path='/admin/orders' element={<Orders />} />
-            <Route path='/admin/products' element={<AdminProducts />} />
-          </Route>
-
-
-
-        </Routes>
-
-      </div>
-    </BrowserRouter>
 
   );
 }
-
-
-
 
 export default App;

@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 //contexts
 import { AuthProvider } from './contexts/AuthContext';
 import { BasketProvider } from './contexts/BasketContext';
+import { BrowserRouter } from 'react-router-dom';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +29,9 @@ root.render(
       <ChakraProvider>
         <AuthProvider>
           <BasketProvider>
-            <App />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
           </BasketProvider>
         </AuthProvider>
       </ChakraProvider>
