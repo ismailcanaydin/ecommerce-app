@@ -1,11 +1,16 @@
 import { Link, Text } from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
-import { fetchProductList } from '../../../api'
+import { fetchProductList, deleteProduct } from '../../../api'
 import { Table, Popconfirm } from 'antd'
 
 function AdminProducts() {
   const { isLoading, isError, data, error } = useQuery(['admin:products'], fetchProductList)
+
+  const queryClient = useQueryClient()
+  const deleteMutation = useMutation(deleteProduct, {
+    onSuccess: () => queryClient.invalidateQueries('admin:products')
+  })
 
   const columns = useMemo(() => {
     return [
@@ -29,11 +34,15 @@ function AdminProducts() {
         key: 'action',
         render: (text, record) => (
           <>
-            <Link top={`/admin/products/${record._id}`}>Edit</Link>
+            <Link to={`/admin/products/${record._id}`}>Edit</Link>
             <Popconfirm
               title='Are you sure?'
               onConfirm={() => {
-                alert('silindi')
+                deleteMutation.mutate(record._id, {
+                  onSuccess: () => {
+                    console.log('success')
+                  }
+                })
               }}
               onCancel={() => console.log('iptal edildi')}
               okText='Yes'
