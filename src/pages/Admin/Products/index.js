@@ -1,8 +1,9 @@
-import { Link, Text } from '@chakra-ui/react'
+import { Text } from '@chakra-ui/react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { fetchProductList, deleteProduct } from '../../../api'
 import { Table, Popconfirm } from 'antd'
+import { Link } from 'react-router-dom'
 
 function AdminProducts() {
   const { isLoading, isError, data, error } = useQuery(['admin:products'], fetchProductList)
