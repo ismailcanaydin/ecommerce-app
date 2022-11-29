@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Button, Flex, Text } from '@chakra-ui/react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useMemo } from 'react'
 import { fetchProductList, deleteProduct } from '../../../api'
@@ -69,9 +69,16 @@ function AdminProducts() {
   console.log(data);
   return (
     <div>
-      <Text fontSize='2xl' p='5'>
-        Products
-      </Text>
+      <Flex justifyContent={'space-between'} alignItems='center'>
+
+        <Text fontSize='2xl' p='5'>
+          Products
+        </Text>
+
+        <Link to={'/admin/products/new'}>
+          <Button>New</Button>
+        </Link>
+      </Flex>
 
       <Table rowKey='_id' dataSource={data} columns={columns} />;
     </div>

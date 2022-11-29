@@ -15,6 +15,7 @@ import Home from './pages/Admin/Home'
 import AdminProducts from './pages/Admin/Products'
 import Orders from './pages/Admin/Orders'
 import AdminProductDetail from './pages/Admin/ProductDetail';
+import NewProduct from './pages/Admin/Products/new';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path='home' element={<Home />} />
             <Route path='orders' element={<Orders />} />
             <Route path='products' element={<AdminProducts />} />
+            <Route path='products/new' element={<NewProduct />} />
             <Route path='products/:product_id' element={<AdminProductDetail />} />
           </Route>
         </Route>
